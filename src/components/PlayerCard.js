@@ -2,8 +2,8 @@ import React from 'react';
 import Modal from './Modal';
 
 const PlayerCard = (props) => {
-	const { player } = props;
-	let color = player === player.game.currentPlayer ? 'primary' : 'secondary';
+	const { player, game } = props;
+	let color = player === game.currentPlayer ? 'primary' : 'secondary';
 	if (player.inBattle) color = 'danger';
 	return (
 		<div className={`card text-white bg-${color} mb-3`}>
