@@ -8,7 +8,7 @@ export default class GameBoard extends Component {
 		super();
 		this.state = {
 			players: [ 'Yang', 'Oz', 'Graham', 'Raymond', 'Josh', 'Dan' ],
-			inBattle: false
+			inBattle: true
 		};
 	}
 	render() {
