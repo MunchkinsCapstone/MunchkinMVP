@@ -17,3 +17,7 @@
 	justify-content: space-evenly;
 	flex-wrap: wrap;
 }
+
+body {
+  font-family: "IM Fell English SC";
+}

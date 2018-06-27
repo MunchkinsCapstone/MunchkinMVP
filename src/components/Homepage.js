@@ -5,7 +5,7 @@ import firebase from 'firebase';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 
 const FIREBASE_API_KEY = process.env.REACT_APP_FIREBASE_API_KEY;
-// console.log('key', FIREBASE_API_KEY);
+console.log('key', FIREBASE_API_KEY);
 
 firebase.initializeApp({
 	apiKey: FIREBASE_API_KEY,

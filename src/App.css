@@ -23,6 +23,46 @@
 }
 
 @keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@font-face {
+  font-family: 'IM Fell English SC';
+  src: url('http://fonts.googleapis.com/css?family=IM+Fell+English+SC');
+}
+
+body {
+  background-image: url('http://staticdelivery.nexusmods.com/mods/161/images/90-1-1352053070.jpg');
+  background-attachment: fixed;
+  background-size: cover;
+  background-repeat: no-repeat;
+  font-family: 'IM Fell English SC';
+}
+
+ButtonPanel .flexContainer {
+  display: flex;
+  justify-content: space-around;
+}
+
+ButtonPanel button {
+  margin: 50px;
+}
+
+.container {
+  margin-top: 2em;
+  display: flex;
+  align-items: space-between;
+  width: 100vw;
+}
+
+.chat-log {
+  padding: 5px;
+  height: fit-content;
+  background-color: rgba(211, 211, 211, 0.6);
+  border: gray 3px solid;
 }

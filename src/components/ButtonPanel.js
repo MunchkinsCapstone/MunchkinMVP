@@ -29,7 +29,7 @@ export const ButtonPanel = (props) => {
     if (game.phase === 2) return (
         <div className='flexContainer'>
             <button type='button' className='btn btn-danger' onClick={endTurn}>
-                Fight A Monster
+                Look For Trouble
             </button>
             <button type='button' className='btn btn-success' onClick={lootRoom}>
                 Loot The Room
