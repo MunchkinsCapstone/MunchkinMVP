@@ -66,3 +66,7 @@ ButtonPanel button {
   background-color: rgba(211, 211, 211, 0.6);
   border: gray 3px solid;
 }
+
+.card-view {
+  border-radius: 40px;
+}
