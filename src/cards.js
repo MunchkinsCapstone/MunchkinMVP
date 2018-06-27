@@ -125,36 +125,6 @@ class Deck {
 //-----------------------------------------------------------------------//
 
 const monsters = [
-  new Monster(
-    'Slime',
-    'https://upload.wikimedia.org/wikipedia/en/1/13/Slime_%28Dragon_Quest%29.jpg',
-    2,
-    1,
-    player => {}
-  ),
-  new Monster(
-    'Skeleton',
-    'https://vignette.wikia.nocookie.net/dragonquest/images/8/8c/DQVIII_-_Skeleton_soldier.png/revision/latest?cb=20151212013303',
-    3,
-    1,
-    player => {}
-  ),
-  new Monster(
-    'Dragon',
-    'https://dragon-quest.org/images/thumb/e/e5/DQ_Green_Dragon.png/350px-DQ_Green_Dragon.png',
-    20,
-    5,
-    player => {
-      player.die();
-    }
-  ),
-  new Monster(
-    'Rat',
-    'https://vignette.wikia.nocookie.net/dragonquest/images/2/29/DQVDS_-_Fat_rat.png/revision/latest?cb=20160731061630',
-    14,
-    4,
-    player => {}
-  ),
   new Monster('3,872', '3872Orcs.jpeg', 10, 3, player => {}),
   new Monster('Amazon', 'Amazon.jpeg', 8, 2, player => {}),
   new Monster('Bigfoot', 'Bigfoot.jpeg', 12, 3, player => {}),
@@ -201,13 +171,27 @@ const monsters = [
   new Monster('Plutonium Dragon', 'PlutoniumDragon.jpeg', 20, 5, player => {}),
   new Monster('Potted Plant', 'PottedPlant.jpeg', 1, 2, player => {}),
   new Monster('Pukachu', 'Pukachu.jpeg', 6, 2, player => {}),
-  new Monster('Platycore', 'Platycore.jpeg', 6, 2, player => {})
+  new Monster('Shrieking Geek', 'ShriekingGeek.jpeg', 6, 2, player => {}),
+  new Monster('Snails On Speed', 'SnailsOnSpeed.jpeg', 6, 2, player => {}),
+  new Monster('Squidzilla', 'Squidzilla.jpeg', 18, 4, player => {}),
+  new Monster('Stoned Golem', 'StonedGolem.jpeg', 14, 4, player => {}),
+  new Monster('Tongue Demon', 'TongueDemon.jpeg', 12, 3, player => {}),
+  new Monster('Undead Horse', 'UndeadHorse.jpeg', 4, 2, player => {}),
+  new Monster(
+    'Unspeakably Awful Indescribable Horror',
+    'UnspeakablyAwfulIndescribableHorror.jpeg',
+    6,
+    2,
+    player => {}
+  ),
+  new Monster('Wannabe Vampire', 'WannabeVampire.jpeg', 12, 3, player => {}),
+  new Monster('Wight Brothers', 'WightBrothers.jpeg', 16, 4, player => {})
 ];
 
 const modifiers = [
   new Modifier(
     'Ancient',
-    '+10 to monster',
+    'Ancient.jpeg',
     monster => {
       monster.level += 10;
     },
@@ -217,18 +201,30 @@ const modifiers = [
   ),
   new Modifier(
     'Baby',
-    '-5 to monster (minimum 1)',
+    'Baby.jpeg',
     monster => {
       monster.shrinkage = Math.min(monster.level - 1, 5);
       monster.level -= monster.shrinkage;
+      monster.treasures--;
     },
     monster => {
       monster.level += monster.shrinkage;
+      monster.treasures++;
+    }
+  ),
+  new Modifier(
+    'Enraged',
+    'Enraged.jpeg',
+    monster => {
+      monster.level += 5;
+    },
+    monster => {
+      monster.level -= 5;
     }
   ),
   new Modifier(
     'Intelligent',
-    '+5 to monster',
+    'Intelligent.jpeg',
     monster => {
       monster.level += 5;
     },
@@ -240,8 +236,19 @@ const modifiers = [
 
 const equipments = [
   new Equipment(
-    'Boots',
-    'You wear these on yer feet',
+    'Bad-Ass Bandana',
+    'BadAssBandana.jpeg',
+    'head',
+    user => {
+      user.bonus += 3;
+    },
+    user => {
+      user.bonus -= 3;
+    }
+  ),
+  new Equipment(
+    'Boots of Butt-Kicking',
+    'BootsOfButtKicking',
     'feet',
     user => {
       user.bonus += 2;
@@ -250,9 +257,404 @@ const equipments = [
       user.bonus -= 2;
     }
   ),
-  new Equipment('Sandals of Protection', '', 'feet', 2),
-  new Equipment('Hat with a feather in it', '', 'head', 2),
-  new Equipment('Shiny Armor', '', 'feet', 2)
+  new Equipment(
+    'Boots of Running Really Fast',
+    'BootsOfRunningReallyFast',
+    'feet',
+    user => {
+      user.run += 2;
+    },
+    user => {
+      user.run -= 2;
+    }
+  ),
+  new Equipment(
+    'Bow With Ribbons',
+    'BowWithRibbons.jpeg',
+    'hands',
+    user => {
+      user.bonus += 4;
+    },
+    user => {
+      user.bonus -= 4;
+    }
+  ),
+  new Equipment(
+    'Broad Sword',
+    'BroadSword.jpeg',
+    'hands',
+    user => {
+      user.bonus += 3;
+    },
+    user => {
+      user.bonus -= 3;
+    }
+  ),
+  new Equipment(
+    'Buckler of Swashing',
+    'BucklerOfSwashing.jpeg',
+    'hands',
+    user => {
+      user.bonus += 2;
+    },
+    user => {
+      user.bonus -= 2;
+    }
+  ),
+  new Equipment(
+    'Chainsaw of Bloody Dismemberment',
+    'ChainsawOfBloodyDismemberment.jpeg',
+    'hands',
+    user => {
+      user.bonus += 3;
+    },
+    user => {
+      user.bonus -= 3;
+    }
+  ),
+  new Equipment(
+    'Cheese Grater of Peace',
+    'CheeseGraterOfPeace.jpeg',
+    'hands',
+    user => {
+      user.bonus += 3;
+    },
+    user => {
+      user.bonus -= 3;
+    }
+  ),
+  new Equipment(
+    'Cloak of Obscurity',
+    'CloakOfObscurity.jpeg',
+    'torso',
+    user => {
+      user.bonus += 4;
+    },
+    user => {
+      user.bonus -= 4;
+    }
+  ),
+  new Equipment(
+    'Dagger of Treachery',
+    'DaggerOfTreachery.jpeg',
+    'hands',
+    user => {
+      user.bonus += 3;
+    },
+    user => {
+      user.bonus -= 3;
+    }
+  ),
+  new Equipment(
+    'Eleven-Foot Pole',
+    'ElevenFootPole.jpeg',
+    'hands',
+    user => {
+      user.bonus += 3;
+    },
+    user => {
+      user.bonus -= 3;
+    }
+  ),
+  new Equipment(
+    'Flaming Armor',
+    'FlamingArmor.jpeg',
+    'torso',
+    user => {
+      user.bonus += 2;
+    },
+    user => {
+      user.bonus -= 2;
+    }
+  ),
+  new Equipment(
+    "Gentlemen's Club",
+    'GentlemensClub.jpeg',
+    'hands',
+    user => {
+      user.bonus += 3;
+    },
+    user => {
+      user.bonus -= 3;
+    }
+  ),
+  new Equipment(
+    'Hammer of Kneecapping',
+    'HammerOfKneecapping.jpeg',
+    'hands',
+    user => {
+      user.bonus += 4;
+    },
+    user => {
+      user.bonus -= 4;
+    }
+  ),
+  new Equipment(
+    'Helm of Courage',
+    'HelmOfCourage.jpeg',
+    'head',
+    user => {
+      user.bonus += 1;
+    },
+    user => {
+      user.bonus -= 1;
+    }
+  ),
+  new Equipment(
+    'Hireling',
+    'Hireling.jpeg',
+    'head',
+    user => {
+      //
+    },
+    user => {
+      //
+    }
+  ),
+  new Equipment(
+    'Horny Helmet',
+    'HornyHelmet.jpeg',
+    'head',
+    user => {
+      user.bonus += 1;
+    },
+    user => {
+      user.bonus -= 1;
+    }
+  ),
+  new Equipment(
+    'Huge Rock',
+    'HugeRock.jpeg',
+    'hands',
+    user => {
+      user.bonus += 3;
+    },
+    user => {
+      user.bonus -= 3;
+    }
+  ),
+  new Equipment(
+    'Kneepads of Allure',
+    'KneepadsOfAllure.jpeg',
+    'legs',
+    user => {
+      user.allure = true;
+    },
+    user => {
+      user.allure = false;
+    }
+  ),
+  new Equipment(
+    'Leather Armor',
+    'LeatherArmor.jpeg',
+    'torso',
+    user => {
+      user.bonus += 1;
+    },
+    user => {
+      user.bonus -= 1;
+    }
+  ),
+  new Equipment(
+    'Limburger and Anchovy Sandwich',
+    'LimburgerAndAnchovySandwich.jpeg',
+    'hands',
+    user => {
+      user.bonus += 1;
+    },
+    user => {
+      user.bonus -= 1;
+    }
+  ),
+  new Equipment(
+    'Mace of Sharpness',
+    'MaceOfSharpness.jpeg',
+    'hands',
+    user => {
+      user.bonus += 4;
+    },
+    user => {
+      user.bonus -= 4;
+    }
+  ),
+  new Equipment(
+    'Mithril Armor',
+    'MithrilArmor.jpeg',
+    'torso',
+    user => {
+      user.bonus += 3;
+    },
+    user => {
+      user.bonus -= 3;
+    }
+  ),
+  new Equipment(
+    'Pointy Hat of Power',
+    'PointyHatOfPower.jpeg',
+    'head',
+    user => {
+      user.bonus += 3;
+    },
+    user => {
+      user.bonus -= 3;
+    }
+  ),
+  new Equipment(
+    'Rapier of Unfairness',
+    'RapierOfUnfairness.jpeg',
+    'hands',
+    user => {
+      user.bonus += 3;
+    },
+    user => {
+      user.bonus -= 3;
+    }
+  ),
+  new Equipment(
+    'Rat on a Stick',
+    'RatOnAStick.jpeg',
+    'hands',
+    user => {
+      user.bonus += 1;
+    },
+    user => {
+      user.bonus -= 1;
+    }
+  ),
+  new Equipment(
+    'Really Impressive Title',
+    'ReallyImpressiveTitle.jpeg',
+    'misc',
+    user => {
+      user.bonus += 3;
+    },
+    user => {
+      user.bonus -= 3;
+    }
+  ),
+  new Equipment(
+    'Sandals of Protection',
+    'SandalsOfProtection.jpeg',
+    'feet',
+    user => {
+      user.protected = true;
+    },
+    user => {
+      user.protected = false;
+    }
+  ),
+  new Equipment(
+    'Shield of Ubiquity',
+    'ShieldOfUbiquity.jpeg',
+    'hands',
+    user => {
+      user.bonus += 4;
+    },
+    user => {
+      user.bonus -= 4;
+    }
+  ),
+  new Equipment(
+    'Short Wide Armor',
+    'ShortWideArmor.jpeg',
+    'torso',
+    user => {
+      user.bonus += 3;
+    },
+    user => {
+      user.bonus -= 3;
+    }
+  ),
+  new Equipment(
+    'Singing & Dancing Sword',
+    'Singing&DancingSword.jpeg',
+    'misc',
+    user => {
+      user.bonus += 2;
+    },
+    user => {
+      user.bonus -= 2;
+    }
+  ),
+  new Equipment(
+    'Slimy Armor',
+    'SlimyArmor.jpeg',
+    'torso',
+    user => {
+      user.bonus += 1;
+    },
+    user => {
+      user.bonus -= 1;
+    }
+  ),
+  new Equipment(
+    'Sneaky Bastard Sword',
+    'SneakyBastardSword.jpeg',
+    'hands',
+    user => {
+      user.bonus += 2;
+    },
+    user => {
+      user.bonus -= 2;
+    }
+  ),
+  new Equipment(
+    'Spiky Knees',
+    'SpikyKnees.jpeg',
+    'legs',
+    user => {
+      user.bonus += 1;
+    },
+    user => {
+      user.bonus -= 1;
+    }
+  ),
+  new Equipment(
+    'Staff of Napalm',
+    'StaffOfNapalm.jpeg',
+    'hands',
+    user => {
+      user.bonus += 5;
+    },
+    user => {
+      user.bonus -= 5;
+    }
+  ),
+  new Equipment(
+    'Stepladder',
+    'Stepladder.jpeg',
+    'misc',
+    user => {
+      user.bonus += 1;
+    },
+    user => {
+      user.bonus -= 1;
+    }
+  ),
+  new Equipment(
+    'Swiss Army Polearm',
+    'SwissArmyPolearm.jpeg',
+    'hands',
+    user => {
+      user.bonus += 4;
+    },
+    user => {
+      user.bonus -= 4;
+    }
+  ),
+  new Equipment(
+    'Tuba of Charm',
+    'TubaOfCharm.jpeg',
+    'hands',
+    user => {
+      user.run += 1;
+      user.tuba = true;
+    },
+    user => {
+      user.run -= 1;
+      user.tuba = false;
+    }
+  )
 ];
 
 const races = [
@@ -371,8 +773,57 @@ const spells = [
   ),
   new Spell('Convenient Addition Error', 'ConvenientAdditionError.jpeg', user =>
     user.levelUp()
-  )
-  //   new Spell('Cotion of Ponfusion', 'CotionOfPonfusion.jpeg', target => {}),
+  ),
+  new Spell('Cotion of Ponfusion', 'CotionOfPonfusion.jpeg', target => {}),
+  new Spell('Doppleganger', 'Doppleganger.jpeg', target => {}),
+  new Spell(
+    'ElectricRadioactivePotion',
+    'Electric Radioactive Potion.jpeg',
+    target => {}
+  ),
+  new Spell('Flaming Poison Potion', 'FlamingPoisonPotion.jpeg', target => {}),
+  new Spell('Flask of Glue', 'FlaskOfGlue.jpeg', target => {}),
+  new Spell(
+    'Freezing Explosive Potion',
+    'FreezingExplosivePotion.jpeg',
+    target => {}
+  ),
+  new Spell('Friendship Potion', 'FriendshipPotion.jpeg', target => {}),
+  new Spell('Doppleganger', 'Doppleganger.jpeg', target => {}),
+  new Spell('Hoard', 'Hoard.jpeg', target => {}),
+  new Spell('Instant Wall', 'InstantWall.jpeg', target => {}),
+  new Spell('Invisibility Potion', 'InvisibilityPotion.jpeg', target => {}),
+  new Spell('Invoke Obscure Rules', 'InvokeObscureRules.jpeg', user =>
+    user.levelUp()
+  ),
+  new Spell('Kill the Hireling', 'KillTheHireling.jpeg', user =>
+    user.levelUp()
+  ),
+  new Spell('Loaed Die', 'LoaedDie.jpeg', target => {}),
+  new Spell('Magic Lamp', 'MagicLamp.jpeg', target => {}),
+  new Spell('Magic Missile', 'MagicMissile.jpeg', target => {}),
+  new Spell('Mutilate the Bodies', 'MutilateTheBodies.jpeg', target => {}),
+  new Spell(
+    'Nasty Tasting Sports Drink',
+    'NastyTastingSportsDrink.jpeg',
+    target => {}
+  ),
+  new Spell('Pollymorph Potion', 'PollymorphPotion.jpeg', target => {}),
+  new Spell(
+    'Potion of General Studliness',
+    'Potion of General Studliness.jpeg',
+    target => {}
+  ),
+  new Spell('Potion of Halitosis', 'Potion of Halitosis.jpeg', target => {}),
+  new Spell('Pretty Balloons', 'PrettyBalloons.jpeg', target => {}),
+  new Spell('Sleep Potion', 'SleepPotion.jpeg', target => {}),
+  new Spell('Steal a Level', 'StealALevel.jpeg', target => {}),
+  new Spell('Transferral Potion', 'TransferralPotion.jpeg', target => {}),
+  new Spell('Wand of Dowsing', 'WandOfDowsing.jpeg', target => {}),
+  new Spell('Whine at the GM', 'WhineAtGM.jpeg', user => user.levelUp()),
+  new Spell('Wishing Ring', 'WishingRing1.jpeg', target => {}),
+  new Spell('Wishing Ring', 'WishingRing2.jpeg', target => {}),
+  new Spell('Yuppie Water', 'YuppieWater.jpeg', target => {})
 ];
 
 const doors = new Deck(
