@@ -1,7 +1,7 @@
 class Card {
-    constructor(name, description) {
+    constructor(name, imageUrl) {
         this.name = name;
-        this.description = description;
+        this.imageUrl = imageUrl;
         this.discard = this.discard.bind(this);
     }
 
@@ -11,13 +11,22 @@ class Card {
 }
 
 class Monster extends Card {
-    constructor(name, description, level, treasures, badStuff) {
-        super(name, description);
+    constructor(name, imageUrl, level, treasures, badStuff) {
+        super(name, imageUrl);
         this.level = level;
         this.treasures = treasures;
         this.type = 'Monster';
         this.badStuff = badStuff;
         this.deck = 'doors';
+        this.buffs = [];
+    }
+
+    get allBuffs() {
+        return this.buffs.reduce((total, buff) => total + buff.bonus, 0);
+    }
+
+    get total() {
+        return this.level + this.allBuffs;
     }
 
     die() {
@@ -26,24 +35,24 @@ class Monster extends Card {
 }
 
 class Buff extends Card {
-    constructor(name, description, effect, remove) {
-        super(name, description);
+    constructor(name, imageUrl, effect, remove) {
+        super(name, imageUrl);
         this.effect = effect;
         this.remove = remove;
     }
 }
 
 class Modifier extends Buff {
-    constructor(name, description, effect, remove) {
-        super(name, description, effect, remove);
+    constructor(name, imageUrl, effect, remove) {
+        super(name, imageUrl, effect, remove);
         this.type = 'Modifier';
         this.deck = 'doors';
     }
 }
 
 class Equipment extends Buff {
-    constructor(name, description, bodyPart, effect, remove) {
-        super(name, description, effect, remove);
+    constructor(name, imageUrl, bodyPart, effect, remove) {
+        super(name, imageUrl, effect, remove);
         this.bodyPart = bodyPart;
         this.type = 'Equipment';
         this.deck = 'treasures';
@@ -51,26 +60,28 @@ class Equipment extends Buff {
 }
 
 class Spell extends Buff {
-    constructor(name, description, effect, remove) {
-        super(name, description, effect, remove);
+    constructor(name, imageUrl, effect, remove) {
+        super(name, imageUrl, effect, remove);
         this.type = 'Spell';
         this.deck = 'treasures';
     }
 }
 
 class Class extends Buff {
-    constructor(name, description, effect, remove) {
-        super(name, description, effect, remove);
+    constructor(name, imageUrl, effect, remove) {
+        super(name, imageUrl, effect, remove);
         this.type = 'Class';
         this.deck = 'doors';
+        this.bonus = 0;
     }
 }
 
 class Race extends Buff {
-    constructor(name, description, effect, remove) {
-        super(name, description, effect, remove);
+    constructor(name, imageUrl, effect, remove) {
+        super(name, imageUrl, effect, remove);
         this.type = 'Race';
         this.deck = 'doors';
+        this.bonus = 0;
     }
 }
 
@@ -91,17 +102,12 @@ class Deck {
         this.cards = cards;
         this.graveYard = [];
         this.draw = this.draw.bind(this);
-        this.flip = this.flip.bind(this);
         this.shuffleCards = this.shuffleCards.bind(this);
         this.restock = this.restock.bind(this);
     }
 
     draw() {
         if (!this.cards.length) this.restock();
-        return this.cards.shift();
-    }
-
-    flip() {
         return this.cards.shift();
     }
 
@@ -119,10 +125,34 @@ class Deck {
 //-----------------------------------------------------------------------//
 
 const monsters = [
-    new Monster('Slime', 'A big glob o\' goop', 2, 1, (player) => {}),
-    new Monster('Skeleton', 'A buncha dancin\', rattlin\' bones', 3, 1, (player) => {}),
-    new Monster('Dragon', 'A gigantic fire-breathing lizard', 20, 5, (player) => {player.die()}),
-    new Monster('Vampire', 'Fanged fiend', 14, 4, (player) => {}),
+    new Monster(
+        'Slime', 
+        'https://upload.wikimedia.org/wikipedia/en/1/13/Slime_%28Dragon_Quest%29.jpg',
+        2,
+        1,
+        (player) => {}
+    ),
+    new Monster(
+        'Skeleton',
+        'https://vignette.wikia.nocookie.net/dragonquest/images/8/8c/DQVIII_-_Skeleton_soldier.png/revision/latest?cb=20151212013303',
+        3,
+        1,
+        (player) => {}
+    ),
+    new Monster(
+        'Dragon',
+        'https://dragon-quest.org/images/thumb/e/e5/DQ_Green_Dragon.png/350px-DQ_Green_Dragon.png',
+        20,
+        5,
+        (player) => {player.die()}
+    ),
+    new Monster(
+        'Rat',
+        'https://vignette.wikia.nocookie.net/dragonquest/images/2/29/DQVDS_-_Fat_rat.png/revision/latest?cb=20160731061630',
+        14,
+        4,
+        (player) => {}
+    ),
 ];
 
 const modifiers = [

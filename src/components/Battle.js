@@ -1,14 +1,16 @@
 import React from 'react';
 
 const Battle = (props) => {
+	const { battle } = props;
+	const monster = battle.monsters[0];
 	return (
 		<div>
 			<div className='row'>
 				<div className='col-12'>
 					<img
 						style={{ width: '100%' }}
-						src='https://i.pinimg.com/736x/6f/c0/50/6fc050ee0177c09195b3bb067898b403--big-daddy-custom-cards.jpg'
-						alt=''
+						src={monster.imageUrl}
+						alt='https://i.pinimg.com/736x/6f/c0/50/6fc050ee0177c09195b3bb067898b403--big-daddy-custom-cards.jpg'
 					/>
 				</div>
 			</div>
@@ -21,16 +23,16 @@ const Battle = (props) => {
 					<h5>Debuff: 0</h5>
 					<hr />
 					<h4>TOTAL: 1</h4>
-					<button className='btn btn-success'>Fight</button>
+					<button className='btn btn-success'>Add Buff</button>
 				</div>
 				<div style={{ backgroundColor: 'white', textAlign: 'center', borderLeft: '1px solid grey' }} className='col-6'>
-					<h3>MONSTER</h3>
-					<h5>Attack: 18</h5>
-					<h5>Buff: 10</h5>
-					<h5>Debuff: 5</h5>
+					<h3>{monster.name.toUpperCase()}</h3>
+					<h5>Level: {monster.level}</h5>
+					<h5>Buff: {monster.allBuffs}</h5>
+					<h5>Debuff: 0</h5>
 					<hr />
-					<h4>TOTAL: 33</h4>
-					<button className='btn btn-warning'>Run</button>
+					<h4>TOTAL: {monster.total}</h4>
+					<button className='btn btn-warning'>Add Buff</button>
 				</div>
 			</div>
 		</div>

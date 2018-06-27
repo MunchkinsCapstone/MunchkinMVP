@@ -26,3 +26,21 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+@font-face {
+  font-family: "IM Fell English SC";
+  src: url("http://fonts.googleapis.com/css?family=IM+Fell+English+SC");
+}
+
+body {
+  font-family: "IM Fell English SC";
+}
+
+ButtonPanel .flexContainer {
+  display: flex;
+  justify-content: space-around;
+}
+
+ButtonPanel button {
+  margin: 50px;
+}

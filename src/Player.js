@@ -8,16 +8,16 @@ class Player {
         this.level = 1;
         this.run = 0;
         this.maxInventory = 5;
-        this.race = new Race('Human', 'A boring old human being', () => { }, () => { });
-        this.class = new Class('Commoner', 'A simple, lowly peasant', () => { }, () => { });
+        this.race = new Race('Human', 'default image', () => { }, () => { });
+        this.class = new Class('Commoner', 'default image', () => { }, () => { });
         this.isActive = false;
         this.equipment = {
-            head: new Equipment('Bare', 'No bonuses', 'head', () => { }, () => { }),
-            torso: new Equipment('Rags', 'No bonuses', 'head', () => { }, () => { }),
-            leftHand: new Equipment('Bare', 'No bonuses', 'head', () => { }, () => { }),
-            rightHand: new Equipment('Bare', 'No bonuses', 'head', () => { }, () => { }),
-            legs: new Equipment('Rags', 'No bonuses', 'head', () => { }, () => { }),
-            feet: new Equipment('Bare', 'No bonuses', 'head', () => { }, () => { }),
+            head: new Equipment('Bare', 'default image', 'head', () => { }, () => { }),
+            torso: new Equipment('Rags', 'default image', 'head', () => { }, () => { }),
+            leftHand: new Equipment('Bare', 'default image', 'head', () => { }, () => { }),
+            rightHand: new Equipment('Bare', 'default image', 'head', () => { }, () => { }),
+            legs: new Equipment('Rags', 'default image', 'head', () => { }, () => { }),
+            feet: new Equipment('Bare', 'default image', 'head', () => { }, () => { }),
             get bonus() {
                 return 0;
             }
@@ -26,6 +26,7 @@ class Player {
         this.equip = this.equip.bind(this);
         this.unequip = this.unequip.bind(this);
         this.game = game;
+        this.inBattle = false;
     }
 
     get attack() {
@@ -94,7 +95,7 @@ class Player {
     levelUp() {
         this.level++;
         log(this.name + ' went up one level!');
-        if (this.level === 10) endGame(this.name);
+        if (this.level === 10) this.game.endGame(this.name);
     }
 
     die() {

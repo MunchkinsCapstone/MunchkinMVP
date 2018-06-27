@@ -2,16 +2,18 @@ import React from 'react';
 import Modal from './Modal';
 
 const PlayerCard = (props) => {
-	const name = props.player;
+	const { player } = props;
+	let color = player === player.game.currentPlayer ? 'primary' : 'secondary';
+	if (player.inBattle) color = 'danger';
 	return (
-		<div className='card text-white bg-secondary mb-3'>
+		<div className={`card text-white bg-${color} mb-3`}>
 			<div className='card-header player-card-top'>
-				<h5>Level: 1</h5>
-				<h4>{name}</h4>
-				<h5>Attack: 1</h5>
+				<h5>Level: {player.level}</h5>
+				<h4>{player.name}</h4>
+				<h5>Attack: {player.attack}</h5>
 			</div>
 			<div className='card-body player-card-button'>
-				<Modal />
+				<Modal player={player}/>
 				<button type='button' className='btn btn-light'>
 					Equipment
 				</button>

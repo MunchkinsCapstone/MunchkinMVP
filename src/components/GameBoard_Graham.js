@@ -108,14 +108,14 @@ class GameBoard extends Component {
 						<div className='row'>
 							<div className='col-12'>
 								<ButtonPanel
-								game={game}
-								startGame={this.startGame}
-								knockKnock={this.knockKnock}
-								fight={this.fight}
-								flee={this.flee}
-								lootRoom={this.lootRoom}
-								discard={this.discard}
-								endTurn={this.endTurn}
+									game={game}
+									startGame={this.startGame}
+									knockKnock={this.knockKnock}
+									fight={this.fight}
+									flee={this.flee}
+									lootRoom={this.lootRoom}
+									discard={this.discard}
+									endTurn={this.endTurn}
 								/>
 							</div>
 						</div>

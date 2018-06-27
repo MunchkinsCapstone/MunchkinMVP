@@ -1,11 +1,12 @@
 import React from 'react';
 
 const Card = (props) => {
+	const { imageUrl } = props.card;
 	return (
 		<div className='card' style={{ width: '18rem' }}>
 			<img
 				className='card-img-top'
-				src='http://d1wkgvkiekr2mp.cloudfront.net/wp-content/uploads/2012/03/Munchkin-8-Doors-16-657x1024.jpg'
+				src={imageUrl}
 				alt='Card'
 			/>
 			<div className='hand card-body container'>

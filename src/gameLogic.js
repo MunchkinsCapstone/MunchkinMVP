@@ -42,7 +42,7 @@ class Game {
 
     knockKnock() {
         log('*knock* *knock*');
-        const card = doors.flip();
+        const card = doors.draw();
         if (card.type === 'Monster') this.startBattle(card);
         else {
             log(`You found: ${card.name}`)
@@ -86,7 +86,10 @@ class Battle {
     constructor(monster, game) {
         this.monsters = [monster];
         this.game = game;
+        this.playerBuffs = [];
+        this.monsterBuffs = [];
         this.combatants = [this.game.currentPlayer];
+        this.combatants[0].inBattle = true;
         this.isActive = true;
         this.end = this.end.bind(this);
         this.flee = this.flee.bind(this);
@@ -132,14 +135,23 @@ class Battle {
                 //     monster.badStuff(combatant);
                 // });
             });
-            this.monsters.forEach(monster => {
-                monster.discard();
-            });
         }
         this.end();
     }
 
     end() {
+        this.monsters.forEach(monster => {
+            monster.discard();
+        });
+        this.playerBuffs.forEach(playerBuff => {
+            playerBuff.discard();
+        });
+        this.monsterBuffs.forEach(monsterBuff => {
+            monsterBuff.discard();
+        });
+        this.combatants.forEach(player => {
+            player.inBattle = false;
+        })
         this.game.battle = { isActive: false }
     }
 }
