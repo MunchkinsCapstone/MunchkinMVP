@@ -56,6 +56,7 @@ class Equipment extends Buff {
     this.bodyPart = bodyPart;
     this.type = 'Equipment';
     this.deck = 'treasures';
+    this.bonus = 0;
   }
 }
 
