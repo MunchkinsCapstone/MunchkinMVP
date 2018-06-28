@@ -30,10 +30,9 @@ class Player {
       ),
       legs: new Equipment('Rags', 'default image', 'head', () => {}, () => {}),
       feet: new Equipment('Bare', 'default image', 'head', () => {}, () => {}),
-      // get bonus() {
-      //   return 0;
-      // }
-      bonus: 0
+      get bonus() {
+        return 0;
+      }
     };
     this.hand = [];
     this.equip = this.equip.bind(this);
