@@ -1,21 +1,21 @@
 import React from 'react';
 import Card from './Card';
 
-const Modal = props => {
-  const { hand } = props;
+const Hand = props => {
+  const { hand, name } = props;
   return (
     <div>
       <button
         type="button"
         className="btn btn-white"
         data-toggle="modal"
-        data-target=".bd-example-modal-lg"
+        data-target={`.${name}-modal`}
       >
         Hand
       </button>
 
       <div
-        className="modal fade bd-example-modal-lg"
+        className={`modal fade bd-example-modal-lg ${name}-modal`}
         tabIndex="-1"
         role="dialog"
         aria-labelledby="myLargeModalLabel"
@@ -35,4 +35,4 @@ const Modal = props => {
   );
 };
 
-export default Modal;
+export default Hand;

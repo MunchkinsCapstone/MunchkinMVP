@@ -70,3 +70,8 @@ ButtonPanel button {
 .card-view {
   border-radius: 40px;
 }
+
+.card,
+.modal-content {
+  background-color: transparent !important;
+}

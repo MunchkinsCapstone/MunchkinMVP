@@ -248,7 +248,7 @@ const equipments = [
   ),
   new Equipment(
     'Boots of Butt-Kicking',
-    'BootsOfButtKicking',
+    'BootsOfButtKicking.jpeg',
     'feet',
     user => {
       user.bonus += 2;
@@ -259,7 +259,7 @@ const equipments = [
   ),
   new Equipment(
     'Boots of Running Really Fast',
-    'BootsOfRunningReallyFast',
+    'BootsOfRunningReallyFast.jpeg',
     'feet',
     user => {
       user.run += 2;
@@ -777,8 +777,8 @@ const spells = [
   new Spell('Cotion of Ponfusion', 'CotionOfPonfusion.jpeg', target => {}),
   new Spell('Doppleganger', 'Doppleganger.jpeg', target => {}),
   new Spell(
-    'ElectricRadioactivePotion',
-    'Electric Radioactive Potion.jpeg',
+    'Electric Radioactive Acid Potion',
+    'ElectricRadioactiveAcidPotion.jpeg',
     target => {}
   ),
   new Spell('Flaming Poison Potion', 'FlamingPoisonPotion.jpeg', target => {}),
@@ -799,9 +799,10 @@ const spells = [
   new Spell('Kill the Hireling', 'KillTheHireling.jpeg', user =>
     user.levelUp()
   ),
-  new Spell('Loaed Die', 'LoaedDie.jpeg', target => {}),
+  new Spell('Loaded Die', 'LoadedDie.jpeg', target => {}),
   new Spell('Magic Lamp', 'MagicLamp.jpeg', target => {}),
-  new Spell('Magic Missile', 'MagicMissile.jpeg', target => {}),
+  new Spell('Magic Missile', 'MagicMissile1.jpeg', target => {}),
+  new Spell('Magic Missile', 'MagicMissile2.jpeg', target => {}),
   new Spell('Mutilate the Bodies', 'MutilateTheBodies.jpeg', target => {}),
   new Spell(
     'Nasty Tasting Sports Drink',
@@ -811,10 +812,10 @@ const spells = [
   new Spell('Pollymorph Potion', 'PollymorphPotion.jpeg', target => {}),
   new Spell(
     'Potion of General Studliness',
-    'Potion of General Studliness.jpeg',
+    'PotionOfGeneralStudliness.jpeg',
     target => {}
   ),
-  new Spell('Potion of Halitosis', 'Potion of Halitosis.jpeg', target => {}),
+  new Spell('Potion of Halitosis', 'PotionOfHalitosis.jpeg', target => {}),
   new Spell('Pretty Balloons', 'PrettyBalloons.jpeg', target => {}),
   new Spell('Sleep Potion', 'SleepPotion.jpeg', target => {}),
   new Spell('Steal a Level', 'StealALevel.jpeg', target => {}),
