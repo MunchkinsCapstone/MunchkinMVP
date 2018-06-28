@@ -92,7 +92,7 @@ export default class GameBoard extends Component {
         <div className="row">
           {game.isActive ? (
             <div className="col-5">
-              {game.playerOrder.map((player, index) => {
+              {game.playerOrder.map(player => {
                 return (
                   <PlayerCard key={player.name} player={player} game={game} />
                 );
