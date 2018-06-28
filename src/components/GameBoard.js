@@ -77,9 +77,10 @@ export default class GameBoard extends Component {
     });
   }
 
-  discard() {
+  discard(player, cardIdx) {
     const { game } = this.state;
-    game.currentPlayer.hand.pop().discard();
+    player.hand[cardIdx].discard();
+    player.hand.splice(cardIdx, 1);
     this.setState({
       game
     });
@@ -94,7 +95,12 @@ export default class GameBoard extends Component {
             <div className="col-5">
               {game.playerOrder.map(player => {
                 return (
-                  <PlayerCard key={player.name} player={player} game={game} />
+                  <PlayerCard
+                    key={player.name}
+                    player={player}
+                    game={game}
+                    discard={this.discard}
+                  />
                 );
               })}
             </div>
@@ -124,7 +130,6 @@ export default class GameBoard extends Component {
               fight={this.fight}
               flee={this.flee}
               lootRoom={this.lootRoom}
-              discard={this.discard}
               endTurn={this.endTurn}
             />
           </div>

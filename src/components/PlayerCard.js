@@ -2,7 +2,7 @@ import React from 'react';
 import Hand from './Hand';
 
 const PlayerCard = props => {
-  const { player, game } = props;
+  const { player, game, discard } = props;
   let color = player === game.currentPlayer ? 'primary' : 'secondary';
   if (player.inBattle) color = 'danger';
   return (
@@ -14,7 +14,7 @@ const PlayerCard = props => {
       </div>
       <div className="card-body player-card-button">
         {console.log('PLAYER: ' + player.name)}
-        <Hand hand={player.hand} name={player.name} />
+        <Hand hand={player.hand} player={player} discard={discard} />
         <button type="button" className="btn btn-light">
           Equipment
         </button>
